@@ -1,5 +1,3 @@
-const displayMessage = (chaussure) => {
+module.exports = function displayMessage(chaussure) {
   console.log(chaussure);
 };
-
-module.exports = displayMessage;
