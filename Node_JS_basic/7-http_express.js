@@ -1,8 +1,7 @@
 const express = require('express');
-
-const args = process.argv.slice(2);
 const countStudents = require('./3-read_file_async');
 
+const args = process.argv.slice(2);
 const DATABASE = args[0];
 
 const app = express();
@@ -15,8 +14,18 @@ app.get('/', (req, res) => {
 app.get('/students', async (req, res) => {
   const msg = 'This is the list of our students\n';
   try {
-    const students = await countStudents(DATABASE);
-    res.send(`${msg}${students.join('\n')}`);
+    const studentsList = [];
+    const originalConsoleLog = console.log;
+    console.log = (message) => {
+      studentsList.push(message);
+    };
+
+    await countStudents(DATABASE);
+
+    console.log = originalConsoleLog;
+
+    const studentsString = studentsList.join('\n');
+    res.send(`${msg}${studentsString}`);
   } catch (error) {
     res.send(`${msg}${error.message}`);
   }
