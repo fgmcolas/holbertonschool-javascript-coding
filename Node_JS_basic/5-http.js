@@ -20,7 +20,6 @@ const app = http.createServer(async (req, res) => {
     res.write('This is the list of our students\n');
     try {
       const studentsList = [];
-      // Capture the console.log output from countStudents
       const originalConsoleLog = console.log;
       console.log = (message) => {
         studentsList.push(message);
@@ -28,7 +27,6 @@ const app = http.createServer(async (req, res) => {
 
       await countStudents(DATABASE);
 
-      // Restore the original console.log
       console.log = originalConsoleLog;
 
       res.end(studentsList.join('\n'));
