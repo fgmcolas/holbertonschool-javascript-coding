@@ -7,7 +7,7 @@ function readDatabase(filePath) {
         reject(new Error('Cannot load the database'));
       } else {
         const inFields = {};
-        const data = dataDb.split('\n').filter(line => line.trim() !== ''); // Remove empty lines
+        const data = dataDb.split('\n').filter((line) => line.trim() !== ''); // Add parentheses here
         const numberOfStudents = data.length - 1;
         console.log(`Number of students: ${numberOfStudents}`);
 
